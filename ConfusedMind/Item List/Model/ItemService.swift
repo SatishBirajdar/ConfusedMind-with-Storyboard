@@ -9,9 +9,9 @@
 import Foundation
 
 class ItemService{
-    var items: [Item] = [Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana")]
-    
-    func getItems() -> [Item] {
-        return items
-    }
+//    var items: [Item] = [Item(context: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana"), Item(title: "Banana"), Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana")]
+//    
+//    func getItems() -> [Item] {
+//        return items
+//    }
 }

@@ -12,8 +12,9 @@ class ItemListPresenterImpl: ItemListPresenter {
     
 //    let stringArray: [Item] = [Item(title: "Apple"), Item(title: "Apricot"), Item(title: "Banana")]
     
-    let items: [Item] = ItemService().getItems()
+//    let items: [Item] = ItemService().getItems()
     
+    let items: [Item] = []
     var itemPresenterView: ItemListPresenterView!
     init() {
         

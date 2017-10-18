@@ -11,7 +11,7 @@ import CoreData
 
 class ItemListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var items: [Item]? = nil
+    var items : [NSManagedObject] = []
     var presenter: ItemListPresenter = ItemListPresenterImpl()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,24 +26,62 @@ class ItemListViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        //1
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Item")
+        
+        //3
+        do {
+            items = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "New Name",
                                       message: "Add a new name",
                                       preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default) {
-                                        [unowned self] action in
-                                        
-                                        guard let textField = alert.textFields?.first,
-                                            let nameToSave = textField.text else {
-                                                return
-                                        }
-                                        let newItem = Item.init(title: nameToSave)
-                                        self.items?.append(newItem)
-                                        self.tableView.reloadData()
+//        let saveAction = UIAlertAction(title: "Save",
+//                                       style: .default) {
+//                                        [unowned self] action in
+//
+//                                        guard let textField = alert.textFields?.first,
+//                                            let nameToSave = textField.text else {
+//                                                return
+//                                        }
+//                                        let newItem = Item.init(name: nameToSave)
+//                                        self.items?.append(newItem)
+//                                        self.tableView.reloadData()
+//        }
+        
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) {
+            [unowned self] action in
+            
+            guard let textField = alert.textFields?.first,
+                let nameToSave = textField.text else {
+                    return
+            }
+            
+            self.save(name: nameToSave)
+            self.tableView.reloadData()
         }
+
         
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
@@ -55,6 +93,37 @@ class ItemListViewController: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    func save(name: String) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        // 1
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Item",
+                                       in: managedContext)!
+        
+        let item = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        // 3
+        item.setValue(name, forKeyPath: "name")
+        
+        // 4
+        do {
+            try managedContext.save()
+            items.append(item)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 }
 
 extension ItemListViewController: ItemListPresenterView {
@@ -65,15 +134,17 @@ extension ItemListViewController: ItemListPresenterView {
 
 extension ItemListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var item = self.items?[indexPath.row]
+        let item = self.items[indexPath.row]
+//        people[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableCell
-        cell.itemName.text = item?.title
+        cell.itemName.text = item.value(forKeyPath: "name") as? String
+//            Item?.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.items?.count)!
+        return (self.items.count)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Item{
-    var title: String
-}
+//struct Item{
+//    var title: String
+//}
 

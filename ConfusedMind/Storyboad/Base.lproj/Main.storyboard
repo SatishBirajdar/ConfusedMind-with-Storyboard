@@ -51,7 +51,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Chart" id="aO5-UD-A98">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="editIcon" id="snw-no-Hyh">
+                        <barButtonItem key="rightBarButtonItem" image="editIcon" id="snw-no-Hyh">
                             <connections>
                                 <segue destination="mor-CH-qx1" kind="show" id="LbG-Ia-Vfy"/>
                             </connections>

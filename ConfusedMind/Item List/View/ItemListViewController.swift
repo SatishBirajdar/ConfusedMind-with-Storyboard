@@ -70,7 +70,7 @@ class ItemListViewController: UIViewController {
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {
             [unowned self] action in
-            
+            alert.textFields?.first?.autocapitalizationType = .words
             guard let textField = alert.textFields?.first,
                 let nameToSave = textField.text else {
                     return
@@ -80,12 +80,13 @@ class ItemListViewController: UIViewController {
             self.tableView.reloadData()
         }
 
-        
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
-        
-        alert.addTextField()
-        
+
+        alert.addTextField { (textField) in
+            textField.autocapitalizationType = .words
+        }
+
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         

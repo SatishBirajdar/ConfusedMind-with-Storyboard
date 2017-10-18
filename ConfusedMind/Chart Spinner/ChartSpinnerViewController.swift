@@ -31,6 +31,8 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
          */
         itemsView.notifyDataSetChanged()
         itemsView.delegate = self
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {

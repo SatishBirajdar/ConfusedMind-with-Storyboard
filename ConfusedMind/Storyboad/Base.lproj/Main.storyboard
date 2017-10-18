@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,12 +26,12 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j67-uj-du5">
-                                <rect key="frame" x="164" y="474" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.72702801169999998" green="0.20719259009999999" blue="0.20950906050000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="131.5" y="474" width="111" height="40"/>
+                                <color key="backgroundColor" red="0.83332991292377623" green="0.27783733014086187" blue="0.19510808881124375" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Qpi-KX-ndO"/>
-                                    <constraint firstAttribute="width" constant="46" id="VP1-ce-BmZ"/>
+                                    <constraint firstAttribute="height" constant="40" id="Qpi-KX-ndO"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="40" minY="0.0" maxX="40" maxY="0.0"/>
                                 <state key="normal" title="Spin">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -52,7 +53,7 @@
                     <navigationItem key="navigationItem" title="Chart" id="aO5-UD-A98">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="editIcon" id="snw-no-Hyh">
                             <connections>
-                                <segue destination="mor-CH-qx1" kind="push" id="LbG-Ia-Vfy"/>
+                                <segue destination="mor-CH-qx1" kind="show" id="LbG-Ia-Vfy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -88,7 +89,7 @@
                                                     <rect key="frame" x="8" y="0.0" width="359" height="70"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oea-mX-VE5">
-                                                            <rect key="frame" x="8" y="5" width="316" height="58"/>
+                                                            <rect key="frame" x="5" y="5" width="317" height="60"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -97,10 +98,10 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t20-ej-kSi">
                                                             <rect key="frame" x="327" y="25.5" width="20" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="20" id="HdO-gt-5iA"/>
+                                                                <constraint firstAttribute="width" constant="20" id="rWc-em-a9q"/>
                                                                 <constraint firstAttribute="height" constant="20" id="y1s-Md-uVY"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="editIcon"/>
+                                                            <state key="normal" image="editIcon"/>
                                                             <connections>
                                                                 <action selector="editButtonClicked:" destination="ZLZ-KC-Ykw" eventType="touchUpInside" id="2h5-R2-jry"/>
                                                             </connections>
@@ -109,11 +110,11 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="t20-ej-kSi" firstAttribute="centerY" secondItem="UcW-TR-teD" secondAttribute="centerY" id="SAp-6Z-blX"/>
-                                                        <constraint firstItem="t20-ej-kSi" firstAttribute="leading" secondItem="oea-mX-VE5" secondAttribute="trailing" constant="3" id="b5J-KO-reS"/>
-                                                        <constraint firstItem="oea-mX-VE5" firstAttribute="leading" secondItem="UcW-TR-teD" secondAttribute="leading" constant="8" id="dSg-OP-ewh"/>
+                                                        <constraint firstItem="t20-ej-kSi" firstAttribute="leading" secondItem="oea-mX-VE5" secondAttribute="trailing" constant="5" id="b5J-KO-reS"/>
+                                                        <constraint firstItem="oea-mX-VE5" firstAttribute="leading" secondItem="UcW-TR-teD" secondAttribute="leading" constant="5" id="dSg-OP-ewh"/>
                                                         <constraint firstItem="oea-mX-VE5" firstAttribute="top" secondItem="UcW-TR-teD" secondAttribute="top" constant="5" id="hYv-En-whK"/>
                                                         <constraint firstAttribute="trailing" secondItem="t20-ej-kSi" secondAttribute="trailing" constant="12" id="jVp-f9-whR"/>
-                                                        <constraint firstAttribute="bottom" secondItem="oea-mX-VE5" secondAttribute="bottom" constant="7" id="xQG-n1-0R0"/>
+                                                        <constraint firstAttribute="bottom" secondItem="oea-mX-VE5" secondAttribute="bottom" constant="5" id="xQG-n1-0R0"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -142,11 +143,18 @@
                         <viewLayoutGuide key="safeArea" id="aqV-qI-WBd"/>
                     </view>
                     <navigationItem key="navigationItem" title="Item List" id="AdO-Aj-LRC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Rrv-Wa-E6S">
-                            <connections>
-                                <action selector="addItem:" destination="mor-CH-qx1" id="7dW-W3-xM7"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Edit" id="GCJ-WV-2gt">
+                                <connections>
+                                    <action selector="editList:" destination="mor-CH-qx1" id="WOx-r5-uFX"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="Rrv-Wa-E6S">
+                                <connections>
+                                    <action selector="addItem:" destination="mor-CH-qx1" id="7dW-W3-xM7"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="pV4-yL-gMz" id="CMs-ZQ-sHW"/>

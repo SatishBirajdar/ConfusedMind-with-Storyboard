@@ -18,7 +18,7 @@ class ItemListViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
         
-
+        
 //        self.title = "Item List"
         tableView?.dataSource = self
         tableView?.delegate = self
@@ -50,25 +50,23 @@ class ItemListViewController: UIViewController {
         }
     }
     
+    @IBAction func editList(_ sender: UIBarButtonItem) {
+        if sender.title == "Edit" {
+            tableView.setEditing(true, animated: true)
+            sender.title = "Done"
+        } else {
+            tableView.setEditing(false, animated: true)
+            sender.title = "Edit"
+        }
+        
+        
+    }
+    
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "New Name",
                                       message: "Add a new name",
                                       preferredStyle: .alert)
-        
-//        let saveAction = UIAlertAction(title: "Save",
-//                                       style: .default) {
-//                                        [unowned self] action in
-//
-//                                        guard let textField = alert.textFields?.first,
-//                                            let nameToSave = textField.text else {
-//                                                return
-//                                        }
-//                                        let newItem = Item.init(name: nameToSave)
-//                                        self.items?.append(newItem)
-//                                        self.tableView.reloadData()
-//        }
-        
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {
             [unowned self] action in
@@ -149,6 +147,32 @@ extension ItemListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        // 1
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            print("item deleted")
+            let itemToDelete = items[indexPath.row]
+            items.remove(at: indexPath.row)
+            managedContext.delete(itemToDelete)
+            // 4
+            do {
+                try managedContext.save()
+                tableView.deleteRows(at: [indexPath], with: .left)
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+         }
     }
 }
 

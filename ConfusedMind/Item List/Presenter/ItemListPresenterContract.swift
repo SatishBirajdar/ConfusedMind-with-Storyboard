@@ -15,5 +15,3 @@ protocol ItemListPresenterView{
 protocol ItemListPresenter {
     func attachView(view: ItemListPresenterView)
 }
-
-

@@ -155,13 +155,12 @@ extension ItemListViewController: ItemListPresenterView {
 
 extension ItemListViewController {
     
-   
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.items[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableCell
         cell.itemName.text = item.value(forKeyPath: "name") as? String
+        cell.row = indexPath.row
         return cell
     }
     
@@ -206,32 +205,23 @@ extension ItemListViewController {
 }
 
 class ItemTableCell: UITableViewCell {
+    var row: Int = 0
     @IBOutlet weak var itemName: UITextView!
     
-   
     @IBAction func editButtonClicked(_ sender: UIButton) {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
-//        
-//        let managedContext =
-//            appDelegate.persistentContainer.viewContext
-//        
-//        let fetchRequest =
-//            NSFetchRequest<NSManagedObject>(entityName: "Item")
-//        
-//        var items = [NSManagedObject]()
-//        //3
-//        do {
-//            items = try managedContext.fetch(fetchRequest)
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
+        print(self.row)
         
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
         
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
         
-        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Item")
+
         let editImage = UIImage.init(named: "editItem")
         let doneImage = UIImage.init(named: "doneEditItem")
         
@@ -239,30 +229,29 @@ class ItemTableCell: UITableViewCell {
             self.itemName.isEditable = true
             self.itemName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
-            
-            
         } else {
             self.itemName.isEditable = false
             self.itemName.resignFirstResponder()
             sender.setImage(editImage, for: .normal)
-            
-//            let entity =
-//                NSEntityDescription.entity(forEntityName: "Item",
-//                                           in: managedContext)!
-//
-//            let item = NSManagedObject(entity: entity,
-//                                       insertInto: managedContext)
-//
-//            item.setValue(self.itemName.text, forKeyPath: "name")
-//
-//            items[sender.tag] = item
-//
-//            do {
-//                try managedContext.save()
-//
-//            } catch let error as NSError {
-//                print("Could not save. \(error), \(error.userInfo)")
-//            }
+         
+            do {
+                let items = try managedContext.fetch(fetchRequest)
+                let item = items[row]
+                item.setValue(self.itemName.text, forKey: "name")
+                
+                //save the context
+                do {
+                    try managedContext.save()
+                    print("saved!")
+                } catch let error as NSError  {
+                    print("Could not save \(error), \(error.userInfo)")
+                } catch {
+                    
+                }
+                
+            } catch {
+                print("Error with request: \(error)")
+            }
         }
 //        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
     }

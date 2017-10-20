@@ -16,6 +16,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var itemsView: PieChartView!
     var months: [String]!
     
+    @IBOutlet weak var emptyChartView: UIView!
     @IBOutlet weak var spinButton: UIButton!
     
     var managedContext = ManagedContext()
@@ -28,6 +29,9 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         
         
         itemsView.noDataText = "No data"
+        emptyChartView.isHidden = true
+        itemsView.isHidden = false
+        itemsView.noDataTextColor = ColorPalette.darkRed
 //        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
         
 //        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
@@ -43,9 +47,19 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        itemsView.noDataText = "No data"
         items = managedContext.fetchItems()
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+
+        guard items.count != 0 else {
+            emptyChartView.isHidden = false
+            itemsView.isHidden = true
+            return
+        }
+        
+        emptyChartView.isHidden = true
+        itemsView.isHidden = false
         setChart(dataPoints: items)
+        
         /**
          Notify PieChart about the change
          */
@@ -66,6 +80,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             let itemName = item.value(forKeyPath: "name") as? String
             
             let dataEntry = PieChartDataEntry(value: 1.0, label: itemName, data:  dataPoints[i] as AnyObject)
+//            let dataEntry = PieChartDataEntry(value: 1.0, label: dataPoints[i], data:  dataPoints[i] as AnyObject)
             dataEntries.append(dataEntry)
         }
         

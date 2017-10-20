@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-class ItemListViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+class ItemListViewController: UITableViewController {
+//    @IBOutlet weak var tableView: UITableView!
     var items : [NSManagedObject] = []
     var presenter: ItemListPresenter = ItemListPresenterImpl()
     var managedContext = ManagedContext()
@@ -60,7 +60,8 @@ class ItemListViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+                tableView.contentInset.bottom -= keyboardSize.height
+//                self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
@@ -152,8 +153,11 @@ extension ItemListViewController: ItemListPresenterView {
     }
 }
 
-extension ItemListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+extension ItemListViewController {
+    
+   
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.items[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableCell
@@ -161,15 +165,15 @@ extension ItemListViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.items.count)
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -194,8 +198,8 @@ extension ItemListViewController: UITableViewDataSource {
     }
 }
 
-extension ItemListViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension ItemListViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         cell.isSelected = true
     }

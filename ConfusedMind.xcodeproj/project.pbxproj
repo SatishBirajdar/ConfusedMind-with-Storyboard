@@ -24,6 +24,7 @@
 		E308CBC21F9697CE0041378B /* ItemListPresenterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB81F9697CD0041378B /* ItemListPresenterContract.swift */; };
 		E308CBC31F9697CE0041378B /* CardViewDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB91F9697CD0041378B /* CardViewDesignable.swift */; };
 		E308CBC41F9697CE0041378B /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBBA1F9697CD0041378B /* ItemListViewController.swift */; };
+		E30946D01F9859E200B80395 /* ManagedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30946CF1F9859E100B80395 /* ManagedContext.swift */; };
 		E35094DD1F969DF2001CFF5C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; };
 		E35094DE1F969DF2001CFF5C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3B4F3981F96CF50001BC7B9 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */; };
@@ -84,6 +85,7 @@
 		E308CBB81F9697CD0041378B /* ItemListPresenterContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListPresenterContract.swift; sourceTree = "<group>"; };
 		E308CBB91F9697CD0041378B /* CardViewDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewDesignable.swift; sourceTree = "<group>"; };
 		E308CBBA1F9697CD0041378B /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		E30946CF1F9859E100B80395 /* ManagedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContext.swift; sourceTree = "<group>"; };
 		E35094DC1F969DF2001CFF5C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = ../Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +143,7 @@
 				E35094E11F969E80001CFF5C /* Chart Spinner */,
 				E35094E21F969E91001CFF5C /* Item List */,
 				E35094E31F969EB4001CFF5C /* Add List Item */,
+				E30946D11F9859EE00B80395 /* CoreData */,
 				E35094DF1F969E5D001CFF5C /* Utils */,
 				E35094E01F969E68001CFF5C /* Storyboad */,
 				E308CB801F9696C70041378B /* AppDelegate.swift */,
@@ -176,6 +179,14 @@
 				E35094DC1F969DF2001CFF5C /* Charts.framework */,
 			);
 			path = Framework;
+			sourceTree = "<group>";
+		};
+		E30946D11F9859EE00B80395 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E30946CF1F9859E100B80395 /* ManagedContext.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		E35094DF1F969E5D001CFF5C /* Utils */ = {
@@ -431,6 +442,7 @@
 				E308CBC01F9697CE0041378B /* ColorPalette.swift in Sources */,
 				E308CBBB1F9697CE0041378B /* ItemPresenterImpl.swift in Sources */,
 				E308CBBE1F9697CE0041378B /* AddListItemViewController.swift in Sources */,
+				E30946D01F9859E200B80395 /* ManagedContext.swift in Sources */,
 				E308CBBC1F9697CE0041378B /* ChartSpinnerViewController.swift in Sources */,
 				E308CBBD1F9697CE0041378B /* ItemService.swift in Sources */,
 			);

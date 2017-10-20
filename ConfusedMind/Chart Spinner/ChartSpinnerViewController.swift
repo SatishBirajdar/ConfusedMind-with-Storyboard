@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Charts
+import CoreData
 
 class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
@@ -17,13 +18,24 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var spinButton: UIButton!
     
+    var managedContext = ManagedContext()
+    var items : [NSManagedObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        itemsView.noDataText = "No data jkbksdbkfb"
+        items = managedContext.fetchItems()
+        
+        itemsView.noDataText = "No data"
+//        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
         let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+        
+//        let item = self.items[indexPath.row]
+//        cell.itemName.text = item.value(forKeyPath: "name") as? String
+        
         
         setChart(dataPoints: months, values: unitsSold)
         /**
@@ -52,7 +64,6 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartData.setDrawValues(false)
-//        hoursPieChartView.legend.labels = [label]
         self.itemsView.data = pieChartData
         
         var colors: [UIColor] = []

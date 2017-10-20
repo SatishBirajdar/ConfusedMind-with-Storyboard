@@ -13,13 +13,13 @@ class ItemListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var items : [NSManagedObject] = []
     var presenter: ItemListPresenter = ItemListPresenterImpl()
+    var managedContext = ManagedContext()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
-        
-        
-//        self.title = "Item List"
+
         tableView?.dataSource = self
         tableView?.delegate = self
         self.presenter.attachView(view: self)
@@ -29,25 +29,27 @@ class ItemListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+//        //1
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//
+//        //2
+//        let fetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "Item")
+//
+//        //3
+//        do {
+//            items = try managedContext.fetch(fetchRequest)
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Item")
-        
-        //3
-        do {
-            items = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        items = managedContext.fetchItems()
     }
     
     @IBAction func editList(_ sender: UIBarButtonItem) {
@@ -58,8 +60,6 @@ class ItemListViewController: UIViewController {
             tableView.setEditing(false, animated: true)
             sender.title = "Edit"
         }
-        
-        
     }
     
     @IBAction func addItem(_ sender: UIBarButtonItem) {
@@ -70,12 +70,13 @@ class ItemListViewController: UIViewController {
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {
             [unowned self] action in
-            alert.textFields?.first?.autocapitalizationType = .words
-            guard let textField = alert.textFields?.first,
-                let nameToSave = textField.text else {
+
+            let textField = alert.textFields?.first
+            
+            guard let nameToSave = textField?.text,  textField?.text != "" else {
+                print("Textfield is empty")
                     return
             }
-            
             self.save(name: nameToSave)
             self.tableView.reloadData()
         }
@@ -99,29 +100,28 @@ class ItemListViewController: UIViewController {
             UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
-        
-        // 1
+
         let managedContext =
             appDelegate.persistentContainer.viewContext
-        
-        // 2
+
         let entity =
             NSEntityDescription.entity(forEntityName: "Item",
                                        in: managedContext)!
-        
+
         let item = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
-        
-        // 3
+
         item.setValue(name, forKeyPath: "name")
-        
-        // 4
+
         do {
             try managedContext.save()
             items.append(item)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        
+//        self.managedContext.saveItem(name: name)
+//        items.append(item)
     }
 }
 
@@ -134,11 +134,9 @@ extension ItemListViewController: ItemListPresenterView {
 extension ItemListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.items[indexPath.row]
-//        people[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableCell
         cell.itemName.text = item.value(forKeyPath: "name") as? String
-//            Item?.name
         return cell
     }
     
@@ -156,7 +154,6 @@ extension ItemListViewController: UITableViewDataSource {
                 return
         }
         
-        // 1
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
@@ -166,7 +163,6 @@ extension ItemListViewController: UITableViewDataSource {
             let itemToDelete = items[indexPath.row]
             items.remove(at: indexPath.row)
             managedContext.delete(itemToDelete)
-            // 4
             do {
                 try managedContext.save()
                 tableView.deleteRows(at: [indexPath], with: .left)
@@ -187,18 +183,61 @@ extension ItemListViewController: UITableViewDelegate{
 class ItemTableCell: UITableViewCell {
     @IBOutlet weak var itemName: UITextView!
     
+   
     @IBAction func editButtonClicked(_ sender: UIButton) {
-        let editImage = UIImage.init(named: "editIcon")
-        let doneImage = UIImage.init(named: "doneIcon")
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//        
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//        
+//        let fetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "Item")
+//        
+//        var items = [NSManagedObject]()
+//        //3
+//        do {
+//            items = try managedContext.fetch(fetchRequest)
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+        
+        
+        
+        
+        let editImage = UIImage.init(named: "editItem")
+        let doneImage = UIImage.init(named: "doneEditItem")
         
         if (sender.imageView?.image?.isEqualToImage(image: editImage!))! {
             self.itemName.isEditable = true
             self.itemName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
+            
+            
         } else {
             self.itemName.isEditable = false
             self.itemName.resignFirstResponder()
             sender.setImage(editImage, for: .normal)
+            
+//            let entity =
+//                NSEntityDescription.entity(forEntityName: "Item",
+//                                           in: managedContext)!
+//
+//            let item = NSManagedObject(entity: entity,
+//                                       insertInto: managedContext)
+//
+//            item.setValue(self.itemName.text, forKeyPath: "name")
+//
+//            items[sender.tag] = item
+//
+//            do {
+//                try managedContext.save()
+//
+//            } catch let error as NSError {
+//                print("Could not save. \(error), \(error.userInfo)")
+//            }
         }
 //        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
     }
@@ -216,7 +255,3 @@ class ItemTableCell: UITableViewCell {
         }
     }
 }
-
-
-
-

@@ -25,26 +25,32 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        items = managedContext.fetchItems()
+        
         
         itemsView.noDataText = "No data"
 //        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
         
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+//        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        
         
 //        let item = self.items[indexPath.row]
 //        cell.itemName.text = item.value(forKeyPath: "name") as? String
         
         
-        setChart(dataPoints: months, values: unitsSold)
+       
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        items = managedContext.fetchItems()
+        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+        setChart(dataPoints: items)
         /**
          Notify PieChart about the change
          */
         itemsView.notifyDataSetChanged()
         itemsView.delegate = self
-        
-        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
@@ -53,10 +59,13 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         itemsView.highlightValue(x: 4.0, y: 0.0, dataSetIndex: 0)
     }
     
-    func setChart(dataPoints: [String], values: [Double]) {
+    func setChart(dataPoints: [NSManagedObject]) {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = PieChartDataEntry(value: values[i], label: dataPoints[i], data:  dataPoints[i] as AnyObject)
+            let item = self.items[i]
+            let itemName = item.value(forKeyPath: "name") as? String
+            
+            let dataEntry = PieChartDataEntry(value: 1.0, label: itemName, data:  dataPoints[i] as AnyObject)
             dataEntries.append(dataEntry)
         }
         

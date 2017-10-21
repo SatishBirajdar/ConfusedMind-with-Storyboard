@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class ItemListViewController: UITableViewController {
-//    @IBOutlet weak var tableView: UITableView!
     var items : [NSManagedObject] = []
     var presenter: ItemListPresenter = ItemListPresenterImpl()
     var managedContext = ManagedContext()
@@ -18,16 +17,31 @@ class ItemListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
-
+        
+        
+        if #available(iOS 11.0, *) {
+//            self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
+            
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
+//        if #available(iOS 11.0, *) {
+//            self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
+//
+////            self.navigationController?.navigationBar.prefersLargeTitles = true
+////            self.navigationItem.largeTitleDisplayMode = .always
+//        } else {
+//            // Fallback on earlier versions
+//
+//        }
+        
         tableView?.dataSource = self
         tableView?.delegate = self
         self.presenter.attachView(view: self)
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
     }
     
     
@@ -57,23 +71,6 @@ class ItemListViewController: UITableViewController {
         items = managedContext.fetchItems()
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                tableView.contentInset.bottom -= keyboardSize.height
-//                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
-    }
-    
     @IBAction func editList(_ sender: UIBarButtonItem) {
         if sender.title == "Edit" {
             tableView.setEditing(true, animated: true)
@@ -97,6 +94,7 @@ class ItemListViewController: UITableViewController {
             
             guard let nameToSave = textField?.text,  textField?.text != "" else {
                 print("Textfield is empty")
+//                textField?.layer.borderColor = UIColor.white.cgColor
                     return
             }
             self.save(name: nameToSave)
@@ -141,9 +139,6 @@ class ItemListViewController: UITableViewController {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        
-//        self.managedContext.saveItem(name: name)
-//        items.append(item)
     }
 }
 
@@ -195,12 +190,14 @@ extension ItemListViewController {
             }
          }
     }
+    
 }
 
 extension ItemListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        cell.isSelected = true
+        tableView.deselectRow(at: indexPath, animated: false)
+//        cell.isSelected = true
     }
 }
 
@@ -209,8 +206,6 @@ class ItemTableCell: UITableViewCell {
     @IBOutlet weak var itemName: UITextView!
     
     @IBAction func editButtonClicked(_ sender: UIButton) {
-        print(self.row)
-        
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -253,19 +248,18 @@ class ItemTableCell: UITableViewCell {
                 print("Error with request: \(error)")
             }
         }
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
     }
-    override var isSelected: Bool
-        {
-        didSet{
-            if (isSelected)
-            {
-                print("custom row selected \(self.itemName.text)")
-            }
-            else
-            {
-                print("custom row not selected")
-            }
-        }
-    }
+//    override var isSelected: Bool
+//        {
+//        didSet{
+//            if (isSelected)
+//            {
+//                print("custom row selected \(self.itemName.text)")
+//            }
+//            else
+//            {
+//                print("custom row not selected")
+//            }
+//        }
+//    }
 }

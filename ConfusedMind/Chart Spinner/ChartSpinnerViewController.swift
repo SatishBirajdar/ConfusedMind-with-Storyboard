@@ -24,24 +24,37 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
-
         
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        print(itemsView.center)
+        print(itemsView.frame.width)
+        print(self.view.center.x)
+        print(UIScreen.main.bounds.width)
+        
+        
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+//        label.center = CGPoint(x: itemsView.center.x, y: itemsView.center.y + 90)
+//        label.textAlignment = .center
+//        label.text = "I'am a test label"
+//        self.view.addSubview(label)
+        
+//        var imageView : UIImageView
+//        imageView  = UIImageView(frame:CGRect(x:0, y:0, width:50, height:80))
+//        imageView.center = CGPoint(x: self.view.center.x, y: itemsView.center.y + 60)
+//        imageView.image = UIImage(named:"redArrow")
+//        self.view.addSubview(imageView)
         
         itemsView.noDataText = "No data"
+        itemsView.chartDescription?.text = ""
         emptyChartView.isHidden = true
         itemsView.isHidden = false
         itemsView.noDataTextColor = ColorPalette.darkRed
-//        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        
-//        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        
-        
-//        let item = self.items[indexPath.row]
-//        cell.itemName.text = item.value(forKeyPath: "name") as? String
-        
-        
-       
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
@@ -68,9 +81,21 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
-        self.itemsView.spin(duration: 3, fromAngle: 0, toAngle: 1000)
+        let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+//        self.itemsView.spin(duration: 2, fromAngle: 0, toAngle: 1080)
+        itemsView.highlightValue(x: 0, y: 0.0, dataSetIndex: 0)
+        itemsView.highlightValue(x: 1, y: 0.0, dataSetIndex: 0)
+        itemsView.highlightValue(x: 2, y: 0.0, dataSetIndex: 0)
+        itemsView.highlightValue(x: 3, y: 0.0, dataSetIndex: 0)
+        itemsView.highlightValue(x: 4, y: 0.0, dataSetIndex: 0)
+        itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
         var selectedData = self.itemsView.data?.getDataSetByIndex(0).entryForIndex(2)
-        itemsView.highlightValue(x: 4.0, y: 0.0, dataSetIndex: 0)
+        print(aRandomInt)
+    }
+    
+    func generateRandomNumber(min: Int, max: Int) -> Double {
+        let randomNum = Int(arc4random_uniform(UInt32(max) - UInt32(min)) + UInt32(min))
+        return Double(randomNum)
     }
     
     func setChart(dataPoints: [NSManagedObject]) {
@@ -84,7 +109,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             dataEntries.append(dataEntry)
         }
         
-        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Units Sold")
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
         
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartData.setDrawValues(false)

@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,56 +19,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0B-a9-qas">
-                                <rect key="frame" x="0.0" y="64" width="375" height="369"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-PH-AD6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data available." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgQ-14-Ul0">
-                                        <rect key="frame" x="8" y="174" width="359" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6a4-QL-D2a">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdq-xV-NCY">
+                                                <rect key="frame" x="122" y="174" width="131" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="369" id="dEk-Gt-7dW"/>
+                                            <constraint firstItem="bdq-xV-NCY" firstAttribute="centerX" secondItem="6a4-QL-D2a" secondAttribute="centerX" id="fw1-N2-LJO"/>
+                                            <constraint firstAttribute="width" priority="999" constant="375" id="z7S-du-Za0"/>
+                                            <constraint firstItem="bdq-xV-NCY" firstAttribute="centerY" secondItem="6a4-QL-D2a" secondAttribute="centerY" id="zzs-aU-eCN"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Dn-gB-xFf" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
+                                        <color key="backgroundColor" red="1" green="0.54438944840000003" blue="0.45756731649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="999" constant="375" id="NcJ-CL-n6l"/>
+                                            <constraint firstAttribute="height" constant="369" id="Y23-AG-hRt"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSo-Ef-dGs">
+                                        <rect key="frame" x="132" y="409" width="111" height="30"/>
+                                        <color key="backgroundColor" red="0.72549019609999998" green="0.20784313730000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="3m7-ZW-xWO"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="40" minY="0.0" maxX="40" maxY="0.0"/>
+                                        <state key="normal" title="Spin">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="spinButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DaQ-UG-n4N"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="OgQ-14-Ul0" firstAttribute="leading" secondItem="d0B-a9-qas" secondAttribute="leading" constant="8" id="8nc-VS-ZIb"/>
-                                    <constraint firstItem="OgQ-14-Ul0" firstAttribute="centerY" secondItem="d0B-a9-qas" secondAttribute="centerY" id="FlF-jE-3Nc"/>
-                                    <constraint firstAttribute="trailing" secondItem="OgQ-14-Ul0" secondAttribute="trailing" constant="8" id="HSy-Lu-zA1"/>
-                                    <constraint firstItem="OgQ-14-Ul0" firstAttribute="centerX" secondItem="d0B-a9-qas" secondAttribute="centerX" id="mNq-ec-KIC"/>
+                                    <constraint firstItem="6a4-QL-D2a" firstAttribute="top" secondItem="gdN-PH-AD6" secondAttribute="top" id="D7E-zx-02X"/>
+                                    <constraint firstItem="7Dn-gB-xFf" firstAttribute="top" secondItem="gdN-PH-AD6" secondAttribute="top" id="G9d-2V-tpm"/>
+                                    <constraint firstItem="sSo-Ef-dGs" firstAttribute="centerX" secondItem="gdN-PH-AD6" secondAttribute="centerX" id="Oix-c6-iYN"/>
+                                    <constraint firstAttribute="bottom" secondItem="sSo-Ef-dGs" secondAttribute="bottom" priority="999" constant="263" id="QsT-ZC-k3o"/>
+                                    <constraint firstItem="7Dn-gB-xFf" firstAttribute="leading" secondItem="gdN-PH-AD6" secondAttribute="leading" id="UVX-9o-kG6"/>
+                                    <constraint firstItem="sSo-Ef-dGs" firstAttribute="top" secondItem="7Dn-gB-xFf" secondAttribute="bottom" constant="40" id="Y09-sK-MEY"/>
+                                    <constraint firstItem="6a4-QL-D2a" firstAttribute="leading" secondItem="gdN-PH-AD6" secondAttribute="leading" id="bb4-S5-ecx"/>
+                                    <constraint firstAttribute="height" priority="999" constant="603" id="cbg-wD-Igp"/>
+                                    <constraint firstAttribute="trailing" secondItem="6a4-QL-D2a" secondAttribute="trailing" id="fu3-r1-bK9"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Dn-gB-xFf" secondAttribute="trailing" id="iV8-EH-f3u"/>
+                                    <constraint firstAttribute="width" priority="999" constant="375" id="s7f-kJ-YQa"/>
+                                    <constraint firstItem="sSo-Ef-dGs" firstAttribute="top" secondItem="6a4-QL-D2a" secondAttribute="bottom" constant="40" id="x4O-H3-4GU"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sw3-lL-V7K" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="64" width="375" height="369"/>
-                                <color key="backgroundColor" red="0.79958580629999998" green="0.79958580629999998" blue="0.79958580629999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="369" id="hxI-i8-PrC"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j67-uj-du5">
-                                <rect key="frame" x="131.5" y="474" width="111" height="40"/>
-                                <color key="backgroundColor" red="0.72549019607843135" green="0.20784313725490194" blue="0.20784313725490194" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Qpi-KX-ndO"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="40" minY="0.0" maxX="40" maxY="0.0"/>
-                                <state key="normal" title="Spin">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="spinButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TMr-qv-kfd"/>
-                                </connections>
-                            </button>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sw3-lL-V7K" secondAttribute="trailing" id="EQh-58-I1f"/>
-                            <constraint firstItem="j67-uj-du5" firstAttribute="top" secondItem="d0B-a9-qas" secondAttribute="bottom" constant="41" id="J0r-ee-q4a"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d0B-a9-qas" secondAttribute="trailing" id="NUw-FX-zSa"/>
-                            <constraint firstItem="d0B-a9-qas" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W8O-jL-7It"/>
-                            <constraint firstItem="Sw3-lL-V7K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Yhc-BW-kjn"/>
-                            <constraint firstItem="Sw3-lL-V7K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="akV-2C-WyI"/>
-                            <constraint firstItem="d0B-a9-qas" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cWX-xF-1Er"/>
-                            <constraint firstItem="j67-uj-du5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fBQ-Zp-ZoL"/>
-                            <constraint firstItem="j67-uj-du5" firstAttribute="top" secondItem="Sw3-lL-V7K" secondAttribute="bottom" constant="41" id="hKN-Ud-9p2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gdN-PH-AD6" secondAttribute="trailing" id="Ntc-Qr-9CD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gdN-PH-AD6" secondAttribute="bottom" id="rka-KQ-igG"/>
+                            <constraint firstItem="gdN-PH-AD6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="x74-fL-4KT"/>
+                            <constraint firstItem="gdN-PH-AD6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yUP-cF-1pR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -79,16 +95,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="emptyChartView" destination="d0B-a9-qas" id="UhT-u1-mr2"/>
-                        <outlet property="itemsView" destination="Sw3-lL-V7K" id="6Nf-Qc-b3M"/>
-                        <outlet property="spinButton" destination="j67-uj-du5" id="dhK-by-Yoi"/>
+                        <outlet property="emptyChartView" destination="6a4-QL-D2a" id="OFm-L8-B2d"/>
+                        <outlet property="itemsView" destination="7Dn-gB-xFf" id="u6K-je-Fgx"/>
+                        <outlet property="spinButton" destination="sSo-Ef-dGs" id="RIi-G9-dba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="720.79999999999995" y="80.50974512743629"/>
         </scene>
-        <!--Title-->
+        <!--Item List-->
         <scene sceneID="lVz-bA-5pk">
             <objects>
                 <tableViewController id="tAX-CQ-zVt" customClass="ItemListViewController" customModule="ConfusedMind" customModuleProvider="target" sceneMemberID="viewController">
@@ -154,7 +170,7 @@
                             <outlet property="delegate" destination="tAX-CQ-zVt" id="Vh2-JD-5jL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="ruP-Wj-IcW">
+                    <navigationItem key="navigationItem" title="Item List" id="ruP-Wj-IcW">
                         <rightBarButtonItems>
                             <barButtonItem title="Edit" id="Akm-Ci-XPW">
                                 <connections>

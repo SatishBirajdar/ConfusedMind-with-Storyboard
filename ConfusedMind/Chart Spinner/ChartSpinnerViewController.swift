@@ -14,13 +14,20 @@ import CoreData
 class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var itemsView: PieChartView!
-    var months: [String]!
-    
     @IBOutlet weak var emptyChartView: UIView!
     @IBOutlet weak var spinButton: UIButton!
+    var months: [String]!
+    
+
     
     var managedContext = ManagedContext()
     var items : [NSManagedObject] = []
+    
+    var seconds = 2
+    var timer = Timer()
+    
+    var isTimerRunning = false
+    var resumeTapped = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,16 +88,49 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
-        let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+//        let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+        if isTimerRunning == false {
+            runTimer()
+//            self.startButton.isEnabled = false
+        }
 //        self.itemsView.spin(duration: 2, fromAngle: 0, toAngle: 1080)
-        itemsView.highlightValue(x: 0, y: 0.0, dataSetIndex: 0)
-        itemsView.highlightValue(x: 1, y: 0.0, dataSetIndex: 0)
-        itemsView.highlightValue(x: 2, y: 0.0, dataSetIndex: 0)
-        itemsView.highlightValue(x: 3, y: 0.0, dataSetIndex: 0)
-        itemsView.highlightValue(x: 4, y: 0.0, dataSetIndex: 0)
-        itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
-        var selectedData = self.itemsView.data?.getDataSetByIndex(0).entryForIndex(2)
-        print(aRandomInt)
+        
+        
+//        itemsView.highlightValue(x: 0, y: 0.0, dataSetIndex: 0)
+//        itemsView.highlightValue(x: 1, y: 0.0, dataSetIndex: 0)
+//        itemsView.highlightValue(x: 2, y: 0.0, dataSetIndex: 0)
+//        itemsView.highlightValue(x: 3, y: 0.0, dataSetIndex: 0)
+//        itemsView.highlightValue(x: 4, y: 0.0, dataSetIndex: 0)
+//        itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
+//        var selectedData = self.itemsView.data?.getDataSetByIndex(0).entryForIndex(2)
+//        print(aRandomInt)
+        
+        
+    }
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ChartSpinnerViewController.updateTimer)), userInfo: nil, repeats: true)
+        isTimerRunning = true
+//        pauseButton.isEnabled = true
+    }
+    
+    
+    @objc func updateTimer() {
+        if self.seconds < 0 {
+            timer.invalidate()
+            //Send alert to indicate time's up.
+            let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+            itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
+            self.seconds = 2
+            isTimerRunning = false
+        } else {
+            print(String(seconds))
+            let myString = String(self.seconds)
+            let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.red, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 25)!, ]
+            let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
+            
+            itemsView.centerAttributedText = myAttrString
+            self.seconds -= 1
+        }
     }
     
     func generateRandomNumber(min: Int, max: Int) -> Double {

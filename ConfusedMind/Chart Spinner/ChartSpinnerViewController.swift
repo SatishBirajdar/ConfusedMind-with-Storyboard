@@ -10,25 +10,26 @@ import Foundation
 import UIKit
 import Charts
 import CoreData
+import AVFoundation
 
 class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var itemsView: PieChartView!
     @IBOutlet weak var emptyChartView: UIView!
     @IBOutlet weak var spinButton: UIButton!
-    var months: [String]!
     
-
+    @IBOutlet weak var speakerButton: UIButton!
     
     var managedContext = ManagedContext()
     var items : [NSManagedObject] = []
     
     var seconds = 2
     var timer = Timer()
-    
     var isTimerRunning = false
-    var resumeTapped = false
     
+
+    var isSpeakerEnabled = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,28 +40,11 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             // Fallback on earlier versions
         }
         
-        print(itemsView.center)
-        print(itemsView.frame.width)
-        print(self.view.center.x)
-        print(UIScreen.main.bounds.width)
-        
-        
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-//        label.center = CGPoint(x: itemsView.center.x, y: itemsView.center.y + 90)
-//        label.textAlignment = .center
-//        label.text = "I'am a test label"
-//        self.view.addSubview(label)
-        
-//        var imageView : UIImageView
-//        imageView  = UIImageView(frame:CGRect(x:0, y:0, width:50, height:80))
-//        imageView.center = CGPoint(x: self.view.center.x, y: itemsView.center.y + 60)
-//        imageView.image = UIImage(named:"redArrow")
-//        self.view.addSubview(imageView)
-        
         itemsView.noDataText = "No data"
         itemsView.chartDescription?.text = ""
         emptyChartView.isHidden = true
-        itemsView.isHidden = false
+        itemsView.isHidden = true
+        spinButton.isHidden = true
         itemsView.noDataTextColor = ColorPalette.darkRed
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -73,11 +57,13 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         guard items.count != 0 else {
             emptyChartView.isHidden = false
             itemsView.isHidden = true
+            spinButton.isHidden = true
             return
         }
         
         emptyChartView.isHidden = true
         itemsView.isHidden = false
+        spinButton.isHidden = false
         setChart(dataPoints: items)
         
         /**
@@ -88,31 +74,15 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
-//        let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
         if isTimerRunning == false {
             runTimer()
-//            self.startButton.isEnabled = false
         }
 //        self.itemsView.spin(duration: 2, fromAngle: 0, toAngle: 1080)
-        
-        
-//        itemsView.highlightValue(x: 0, y: 0.0, dataSetIndex: 0)
-//        itemsView.highlightValue(x: 1, y: 0.0, dataSetIndex: 0)
-//        itemsView.highlightValue(x: 2, y: 0.0, dataSetIndex: 0)
-//        itemsView.highlightValue(x: 3, y: 0.0, dataSetIndex: 0)
-//        itemsView.highlightValue(x: 4, y: 0.0, dataSetIndex: 0)
-//        itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
-//        var selectedData = self.itemsView.data?.getDataSetByIndex(0).entryForIndex(2)
-//        print(aRandomInt)
-        
-        
     }
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ChartSpinnerViewController.updateTimer)), userInfo: nil, repeats: true)
         isTimerRunning = true
-//        pauseButton.isEnabled = true
     }
-    
     
     @objc func updateTimer() {
         if self.seconds < 0 {
@@ -122,8 +92,19 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
             self.seconds = 2
             isTimerRunning = false
+            
+            let itemName = items[Int(aRandomInt)].value(forKeyPath: "name") as? String
+            let synth = AVSpeechSynthesizer()
+            let myUtterance = AVSpeechUtterance(string: itemName!)
+            myUtterance.rate = 0.5
+
+            if isSpeakerEnabled {
+                synth.speak(myUtterance)
+            } else {
+                synth.stopSpeaking(at: AVSpeechBoundary.word)
+            }
+            
         } else {
-            print(String(seconds))
             let myString = String(self.seconds)
             let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.red, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 25)!, ]
             let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
@@ -138,6 +119,19 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         return Double(randomNum)
     }
     
+    @IBAction func speakerButtonClicked(_ sender: UIButton) {
+        let speaker = UIImage(named: "soundSpeaker")
+        let mute = UIImage(named: "soundMute")
+        guard isSpeakerEnabled else {
+            isSpeakerEnabled = true
+            sender.setImage(mute, for: UIControlState.normal)
+            return
+        }
+        
+        sender.setImage(speaker, for: UIControlState.normal)
+        isSpeakerEnabled = false
+    }
+    
     func setChart(dataPoints: [NSManagedObject]) {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
@@ -145,7 +139,6 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             let itemName = item.value(forKeyPath: "name") as? String
             
             let dataEntry = PieChartDataEntry(value: 1.0, label: itemName, data:  dataPoints[i] as AnyObject)
-//            let dataEntry = PieChartDataEntry(value: 1.0, label: dataPoints[i], data:  dataPoints[i] as AnyObject)
             dataEntries.append(dataEntry)
         }
         

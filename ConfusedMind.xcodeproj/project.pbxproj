@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E305A3AD1F9F05B3007507AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E305A3AC1F9F05B3007507AC /* AVFoundation.framework */; };
 		E308CB811F9696C70041378B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CB801F9696C70041378B /* AppDelegate.swift */; };
 		E308CB861F9696C70041378B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E308CB841F9696C70041378B /* Main.storyboard */; };
 		E308CB891F9696C70041378B /* ConfusedMind.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E308CB871F9696C70041378B /* ConfusedMind.xcdatamodeld */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E305A3AC1F9F05B3007507AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E308CB7D1F9696C70041378B /* ConfusedMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfusedMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E308CB801F9696C70041378B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E308CB851F9696C70041378B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E305A3AD1F9F05B3007507AC /* AVFoundation.framework in Frameworks */,
 				E35094DD1F969DF2001CFF5C /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E305A3AB1F9F05B3007507AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E305A3AC1F9F05B3007507AC /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E308CB741F9696C70041378B = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +135,7 @@
 				E308CB971F9696C70041378B /* ConfusedMindTests */,
 				E308CBA21F9696C70041378B /* ConfusedMindUITests */,
 				E308CB7E1F9696C70041378B /* Products */,
+				E305A3AB1F9F05B3007507AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -626,7 +638,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Satish Birajdar (3PSKWPY773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3PSKWPY773;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -650,7 +662,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Satish Birajdar (3PSKWPY773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3PSKWPY773;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

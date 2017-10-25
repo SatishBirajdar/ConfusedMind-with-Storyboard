@@ -23,10 +23,11 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     var managedContext = ManagedContext()
     var items : [NSManagedObject] = []
     
-    var seconds = 2
+    var seconds = 1
     var timer = Timer()
     var isTimerRunning = false
     
+    var aRandomInt = 0.0
 
     var isSpeakerEnabled = false
 
@@ -40,12 +41,18 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             // Fallback on earlier versions
         }
         
+        
+        emptyChartView.isHidden = true
+        
         itemsView.noDataText = "No data"
         itemsView.chartDescription?.text = ""
-        emptyChartView.isHidden = true
+        itemsView.highlightPerTapEnabled = false
         itemsView.isHidden = true
-        spinButton.isHidden = true
         itemsView.noDataTextColor = ColorPalette.darkRed
+        
+        spinButton.layer.cornerRadius = 25
+        spinButton.isHidden = true
+        
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
@@ -53,7 +60,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         itemsView.noDataText = "No data"
         items = managedContext.fetchItems()
-
+        
         guard items.count != 0 else {
             emptyChartView.isHidden = false
             itemsView.isHidden = true
@@ -74,10 +81,19 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
+        aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+        
+        self.itemsView.spin(duration: 3, fromAngle: 0, toAngle: 1080)
+        
+        let myString = "spinning..."
+        let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
+        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
+        
+        itemsView.centerAttributedText = myAttrString
+        
         if isTimerRunning == false {
             runTimer()
         }
-//        self.itemsView.spin(duration: 2, fromAngle: 0, toAngle: 1080)
     }
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ChartSpinnerViewController.updateTimer)), userInfo: nil, repeats: true)
@@ -85,12 +101,14 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @objc func updateTimer() {
+        
         if self.seconds < 0 {
             timer.invalidate()
             //Send alert to indicate time's up.
-            let aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+            
+            itemsView.centerText = ""
             itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
-            self.seconds = 2
+            self.seconds = 1
             isTimerRunning = false
             
             let itemName = items[Int(aRandomInt)].value(forKeyPath: "name") as? String
@@ -103,13 +121,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             } else {
                 synth.stopSpeaking(at: AVSpeechBoundary.word)
             }
-            
         } else {
-            let myString = String(self.seconds)
-            let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.red, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 25)!, ]
-            let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
-            
-            itemsView.centerAttributedText = myAttrString
             self.seconds -= 1
         }
     }
@@ -127,7 +139,6 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             sender.setImage(mute, for: UIControlState.normal)
             return
         }
-        
         sender.setImage(speaker, for: UIControlState.normal)
         isSpeakerEnabled = false
     }

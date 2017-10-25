@@ -234,6 +234,6 @@
     <resources>
         <image name="editItem" width="23" height="23"/>
         <image name="pencilIcon11" width="23" height="23"/>
-        <image name="soundSpeaker" width="256" height="256"/>
+        <image name="soundSpeaker" width="85" height="85"/>
     </resources>
 </document>

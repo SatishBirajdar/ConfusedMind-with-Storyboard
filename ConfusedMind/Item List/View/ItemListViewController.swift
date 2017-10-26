@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 
-class ItemListViewController: UITableViewController {
+class ItemListViewController: UITableViewController, UITextFieldDelegate {
     var items : [NSManagedObject] = []
     var presenter: ItemListPresenter = ItemListPresenterImpl()
     var managedContext = ManagedContext()
+    
+    var alertText: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +29,10 @@ class ItemListViewController: UITableViewController {
             // Fallback on earlier versions
         }
         
-//        if #available(iOS 11.0, *) {
-//            self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
-//
-////            self.navigationController?.navigationBar.prefersLargeTitles = true
-////            self.navigationItem.largeTitleDisplayMode = .always
-//        } else {
-//            // Fallback on earlier versions
-//
-//        }
-        
         tableView?.dataSource = self
         tableView?.delegate = self
         self.presenter.attachView(view: self)
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        
     }
     
     
@@ -89,13 +80,10 @@ class ItemListViewController: UITableViewController {
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {
             [unowned self] action in
-
             let textField = alert.textFields?.first
-            
             guard let nameToSave = textField?.text,  textField?.text != "" else {
                 print("Textfield is empty")
-//                textField?.layer.borderColor = UIColor.white.cgColor
-                    return
+                return
             }
             self.save(name: nameToSave)
             self.tableView.reloadData()
@@ -105,6 +93,7 @@ class ItemListViewController: UITableViewController {
                                          style: .default)
 
         alert.addTextField { (textField) in
+            textField.delegate = self
             textField.autocapitalizationType = .words
         }
 
@@ -114,8 +103,13 @@ class ItemListViewController: UITableViewController {
         present(alert, animated: true)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= 20 // Bool
+    }
+    
     func save(name: String) {
-        
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -201,9 +195,25 @@ extension ItemListViewController {
     }
 }
 
-class ItemTableCell: UITableViewCell {
+class ItemTableCell: UITableViewCell, UITextViewDelegate {
     var row: Int = 0
     @IBOutlet weak var itemName: UITextView!
+    
+//    self.itemName.ShouldChangeText += delegate
+//    {
+//    if(itemName.Text.Length > 159) // limit to one sms length
+//    {
+//    return false;
+//    }
+//
+//    return true;
+//    }
+    
+    
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.characters.count + (text.characters.count - range.length) <= 20
+    }
     
     @IBAction func editButtonClicked(_ sender: UIButton) {
         guard let appDelegate =

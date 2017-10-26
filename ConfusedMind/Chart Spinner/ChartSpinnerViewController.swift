@@ -47,13 +47,9 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         itemsView.noDataText = "No data"
         itemsView.chartDescription?.text = ""
         itemsView.highlightPerTapEnabled = false
-        itemsView.isHidden = true
         itemsView.noDataTextColor = ColorPalette.darkRed
         
         spinButton.layer.cornerRadius = 25
-        spinButton.isHidden = true
-        
-        
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
@@ -65,12 +61,14 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             emptyChartView.isHidden = false
             itemsView.isHidden = true
             spinButton.isHidden = true
+            speakerButton.isHidden = true
             return
         }
         
         emptyChartView.isHidden = true
         itemsView.isHidden = false
         spinButton.isHidden = false
+        speakerButton.isHidden = false
         setChart(dataPoints: items)
         
         /**

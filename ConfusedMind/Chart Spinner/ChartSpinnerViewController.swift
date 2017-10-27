@@ -136,10 +136,10 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         let mute = UIImage(named: "soundMute")
         guard isSpeakerEnabled else {
             isSpeakerEnabled = true
-            sender.setImage(mute, for: UIControlState.normal)
+            sender.setImage(speaker, for: UIControlState.normal)
             return
         }
-        sender.setImage(speaker, for: UIControlState.normal)
+        sender.setImage(mute, for: UIControlState.normal)
         isSpeakerEnabled = false
     }
     

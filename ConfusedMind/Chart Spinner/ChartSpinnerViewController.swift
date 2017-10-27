@@ -79,6 +79,8 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
+        
+        itemsView.highlightValue(x: -1, y: -1, dataSetIndex: 0)
         aRandomInt = generateRandomNumber(min:0, max: self.items.count)
         
         self.itemsView.spin(duration: 3, fromAngle: 0, toAngle: 1080)

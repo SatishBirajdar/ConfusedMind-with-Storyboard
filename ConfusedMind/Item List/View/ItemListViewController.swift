@@ -176,7 +176,7 @@ extension ItemListViewController {
 
 class ItemTableCell: UITableViewCell, UITextViewDelegate {
     var row: Int = 0
-    @IBOutlet weak var itemName: UITextView!
+    @IBOutlet weak var itemName: UITextField!
     
 //    self.itemName.ShouldChangeText += delegate
 //    {
@@ -207,15 +207,17 @@ class ItemTableCell: UITableViewCell, UITextViewDelegate {
             NSFetchRequest<NSManagedObject>(entityName: "Item")
 
         let editImage = UIImage.init(named: "editItem")
-        let doneImage = UIImage.init(named: "doneEditItem")
+        let doneImage = UIImage.init(named: "saveIcon")
         
         if (sender.imageView?.image?.isEqualToImage(image: editImage!))! {
-            self.itemName.isEditable = true
+            self.itemName.isEnabled = true
+//            self.itemName.isUserInteractionEnabled = true
             self.itemName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
 //            sender.setTitle("Done", for: .normal)
         } else {
-            self.itemName.isEditable = false
+            self.itemName.isEnabled = false
+//            self.itemName.isUserInteractionEnabled = false
             self.itemName.resignFirstResponder()
             sender.setImage(editImage, for: .normal)
          

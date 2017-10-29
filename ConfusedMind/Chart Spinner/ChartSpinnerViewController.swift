@@ -49,7 +49,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         itemsView.highlightPerTapEnabled = false
         itemsView.noDataTextColor = ColorPalette.darkRed
         
-        spinButton.layer.cornerRadius = 25
+        spinButton.layer.cornerRadius = 12
         self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     

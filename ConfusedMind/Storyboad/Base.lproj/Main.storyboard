@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="width" constant="35" id="U25-Sg-VC9"/>
                                     <constraint firstAttribute="height" constant="35" id="i9y-S3-rNu"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="soundMute"/>
+                                <state key="normal" title="Button" image="soundSpeaker"/>
                                 <connections>
                                     <action selector="speakerButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ImW-mc-mqI"/>
                                 </connections>
@@ -103,7 +103,7 @@
             </objects>
             <point key="canvasLocation" x="720.79999999999995" y="80.50974512743629"/>
         </scene>
-        <!--Item List-->
+        <!--Options-->
         <scene sceneID="lVz-bA-5pk">
             <objects>
                 <tableViewController id="tAX-CQ-zVt" customClass="ItemListViewController" customModule="ConfusedMind" customModuleProvider="target" sceneMemberID="viewController">
@@ -172,7 +172,7 @@
                             <outlet property="delegate" destination="tAX-CQ-zVt" id="Vh2-JD-5jL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Item List" id="ruP-Wj-IcW">
+                    <navigationItem key="navigationItem" title="Options" id="ruP-Wj-IcW">
                         <rightBarButtonItems>
                             <barButtonItem title="Edit" id="Akm-Ci-XPW">
                                 <connections>
@@ -222,6 +222,6 @@
     <resources>
         <image name="editItem" width="23" height="23"/>
         <image name="pencilIcon11" width="23" height="23"/>
-        <image name="soundMute" width="85" height="85"/>
+        <image name="soundSpeaker" width="85" height="85"/>
     </resources>
 </document>

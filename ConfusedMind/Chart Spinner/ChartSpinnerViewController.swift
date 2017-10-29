@@ -29,7 +29,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     var aRandomInt = 0.0
 
-    var isSpeakerEnabled = false
+    var isSpeakerEnabled = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +108,15 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             
             itemsView.centerText = ""
             itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
+            
+            
+//            let layer : CALayer = CALayer()
+//            layer.backgroundColor = UIColor.red as? CGColor
+//            itemsView.draw(layer, in: CGPoint(x: aRandomInt, y: 0.0) as! CGContext)
+//
+//            itemsView.hi
+            
+            
             self.seconds = 1
             isTimerRunning = false
             

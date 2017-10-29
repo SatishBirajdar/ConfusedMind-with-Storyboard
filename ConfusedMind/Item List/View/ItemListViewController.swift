@@ -53,8 +53,8 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         
-        let alert = UIAlertController(title: "New Name",
-                                      message: "Add a new name",
+        let alert = UIAlertController(title: "Add a new option",
+                                      message: "",
                                       preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Save", style: .default) {
@@ -213,6 +213,7 @@ class ItemTableCell: UITableViewCell, UITextViewDelegate {
             self.itemName.isEditable = true
             self.itemName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
+//            sender.setTitle("Done", for: .normal)
         } else {
             self.itemName.isEditable = false
             self.itemName.resignFirstResponder()

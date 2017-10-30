@@ -40,7 +40,7 @@ class OptionListViewController: UITableViewController, UITextFieldDelegate {
         options = managedContext.fetchOptions()
     }
     
-    @IBAction func editList(_ sender: UIBarButtonItem) {
+    @IBAction func editListClicked(_ sender: UIBarButtonItem) {
         if sender.title == "Edit" {
             tableView.setEditing(true, animated: true)
             sender.title = "Done"
@@ -139,7 +139,7 @@ extension OptionListViewController {
         let option = self.options[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OptionTableCell
-        cell.itemName.text = option.value(forKeyPath: "name") as? String
+        cell.optionName.text = option.value(forKeyPath: "name") as? String
         cell.row = indexPath.row
         return cell
     }
@@ -172,7 +172,7 @@ extension OptionListViewController {
 
 class OptionTableCell: UITableViewCell, UITextViewDelegate {
     var row: Int = 0
-    @IBOutlet weak var itemName: UITextField!
+    @IBOutlet weak var optionName: UITextField!
     var managedContext = ManagedContext()
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -181,18 +181,18 @@ class OptionTableCell: UITableViewCell, UITextViewDelegate {
     
     @IBAction func editButtonClicked(_ sender: UIButton) {
         
-        let newOptionName: String = self.itemName.text!
+        let newOptionName: String = self.optionName.text!
         
         let editImage = UIImage.init(named: "editItem")
         let doneImage = UIImage.init(named: "saveIcon")
         
         if (sender.imageView?.image?.isEqualToImage(image: editImage!))! {
-            self.itemName.isEnabled = true
-            self.itemName.becomeFirstResponder()
+            self.optionName.isEnabled = true
+            self.optionName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
         } else {
-            self.itemName.isEnabled = false
-            self.itemName.resignFirstResponder()
+            self.optionName.isEnabled = false
+            self.optionName.resignFirstResponder()
             sender.setImage(editImage, for: .normal)
 
             self.managedContext.editOptionFromManagedContext(optionName: newOptionName, index: row)

@@ -163,7 +163,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="itemName" destination="9eA-wY-JhS" id="soy-LO-CZ1"/>
+                                    <outlet property="optionName" destination="9eA-wY-JhS" id="HlA-YS-7HF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

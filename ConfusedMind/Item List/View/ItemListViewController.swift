@@ -51,35 +51,8 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func addItem(_ sender: UIBarButtonItem) {
-        
-        let alert = UIAlertController(title: "Add a new option",
-                                      message: "",
-                                      preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default) {
-            [unowned self] action in
-            let textField = alert.textFields?.first
-            guard let nameToSave = textField?.text,  textField?.text != "" else {
-                print("Textfield is empty")
-                return
-            }
-            self.save(name: nameToSave)
-            self.tableView.reloadData()
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
-
-        alert.addTextField { (textField) in
-            textField.delegate = self
-            textField.autocapitalizationType = .words
-        }
-
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
+    @IBAction func addOptionClicked(_ sender: UIBarButtonItem) {
+        self.addNewOption()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -104,8 +77,14 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
         let item = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
 
+
+
         item.setValue(name, forKeyPath: "name")
 
+//        var item: NSManagedObject
+//
+//        item = managedContext.entityForOptionName(optionName: name)
+        
         do {
             try managedContext.save()
             items.append(item)
@@ -116,9 +95,46 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
 }
 
 extension ItemListViewController: ItemListPresenterView {
-    func displayItems(items: [Item]) {
-        self.items = items
+    func loadOptionList(options: [Item]) {
+        self.items = options
     }
+    
+    func addNewOption() {
+        
+        let alert = UIAlertController(title: "Add a new option",
+                                      message: "",
+                                      preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) {
+            [unowned self] action in
+            let textField = alert.textFields?.first
+            guard let nameToSave = textField?.text,  textField?.text != "" else {
+                print("Textfield is empty")
+                return
+            }
+            self.save(name: nameToSave)
+            self.tableView.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
+        
+        alert.addTextField { (textField) in
+            textField.delegate = self
+            textField.autocapitalizationType = .words
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
+    func deleteOption(index: Int) {
+        //        items.remove(at: index)
+        managedContext.deleteOptionFromManagedContext(index: index)
+    }
+    
 }
 
 extension ItemListViewController {
@@ -141,29 +157,13 @@ extension ItemListViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
         
         if editingStyle == .delete {
-            // Delete the row from the data source
-            print("item deleted")
-            let itemToDelete = items[indexPath.row]
             items.remove(at: indexPath.row)
-            managedContext.delete(itemToDelete)
-            do {
-                try managedContext.save()
-                tableView.deleteRows(at: [indexPath], with: .left)
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
+            managedContext.deleteOptionFromManagedContext(index: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
          }
     }
-    
 }
 
 extension ItemListViewController {
@@ -177,68 +177,29 @@ extension ItemListViewController {
 class ItemTableCell: UITableViewCell, UITextViewDelegate {
     var row: Int = 0
     @IBOutlet weak var itemName: UITextField!
-    
-//    self.itemName.ShouldChangeText += delegate
-//    {
-//    if(itemName.Text.Length > 159) // limit to one sms length
-//    {
-//    return false;
-//    }
-//
-//    return true;
-//    }
-    
-    
+    var managedContext = ManagedContext()
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return textView.text.characters.count + (text.characters.count - range.length) <= 20
     }
     
     @IBAction func editButtonClicked(_ sender: UIButton) {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let newOptionName: String = self.itemName.text!
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Item")
-
         let editImage = UIImage.init(named: "editItem")
         let doneImage = UIImage.init(named: "saveIcon")
         
         if (sender.imageView?.image?.isEqualToImage(image: editImage!))! {
             self.itemName.isEnabled = true
-//            self.itemName.isUserInteractionEnabled = true
             self.itemName.becomeFirstResponder()
             sender.setImage(doneImage, for: .normal)
-//            sender.setTitle("Done", for: .normal)
         } else {
             self.itemName.isEnabled = false
-//            self.itemName.isUserInteractionEnabled = false
             self.itemName.resignFirstResponder()
             sender.setImage(editImage, for: .normal)
-         
-            do {
-                let items = try managedContext.fetch(fetchRequest)
-                let item = items[row]
-                item.setValue(self.itemName.text, forKey: "name")
-                
-                //save the context
-                do {
-                    try managedContext.save()
-                    print("saved!")
-                } catch let error as NSError  {
-                    print("Could not save \(error), \(error.userInfo)")
-                } catch {
-                    
-                }
-                
-            } catch {
-                print("Error with request: \(error)")
-            }
+
+            self.managedContext.editOptionFromManagedContext(optionName: newOptionName, index: row)
         }
     }
 //    override var isSelected: Bool

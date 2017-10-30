@@ -18,6 +18,6 @@ class ItemListPresenterImpl: ItemListPresenter {
     
     func attachView(view: ItemListPresenterView){
         itemPresenterView = view
-        itemPresenterView.displayItems(items: self.items)
+        itemPresenterView.loadOptionList(options: self.items)
     }
 }

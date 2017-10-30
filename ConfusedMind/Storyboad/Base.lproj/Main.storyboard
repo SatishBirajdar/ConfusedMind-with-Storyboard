@@ -57,7 +57,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSo-Ef-dGs">
-                                <rect key="frame" x="142" y="656" width="131" height="60"/>
+                                <rect key="frame" x="141.66666666666669" y="656" width="131.00000000000006" height="60"/>
                                 <color key="backgroundColor" red="0.72549019609999998" green="0.20784313730000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="60" id="SMJ-I0-2Ey"/>
@@ -176,12 +176,12 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Edit" id="Akm-Ci-XPW">
                                 <connections>
-                                    <action selector="editList:" destination="tAX-CQ-zVt" id="u7z-yR-0Fh"/>
+                                    <action selector="editListClicked:" destination="tAX-CQ-zVt" id="lRj-SQ-fCd"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="Fbr-cM-V5e">
                                 <connections>
-                                    <action selector="addItem:" destination="tAX-CQ-zVt" id="EAN-7j-0FA"/>
+                                    <action selector="addOptionClicked:" destination="tAX-CQ-zVt" id="g3U-eY-CTU"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

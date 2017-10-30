@@ -28,9 +28,9 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     var isTimerRunning = false
     
     var aRandomInt = 0.0
-
+    
     var isSpeakerEnabled = true
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,21 +79,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func spinButtonAction(_ sender: Any) {
-        
-        itemsView.highlightValue(x: -1, y: -1, dataSetIndex: 0)
-        aRandomInt = generateRandomNumber(min:0, max: self.items.count)
-        
-        self.itemsView.spin(duration: 3, fromAngle: 0, toAngle: 1080)
-        
-        let myString = "spinning..."
-        let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
-        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
-        
-        itemsView.centerAttributedText = myAttrString
-        
-        if isTimerRunning == false {
-            runTimer()
-        }
+        spinAction()
     }
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ChartSpinnerViewController.updateTimer)), userInfo: nil, repeats: true)
@@ -152,6 +138,37 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         isSpeakerEnabled = false
     }
     
+//    func setChart(dataPoints: [NSManagedObject]) {
+//        var dataEntries: [ChartDataEntry] = []
+//        for i in 0..<dataPoints.count {
+//            let item = self.items[i]
+//            let itemName = item.value(forKeyPath: "name") as? String
+//
+//            let dataEntry = PieChartDataEntry(value: 1.0, label: itemName, data:  dataPoints[i] as AnyObject)
+//            dataEntries.append(dataEntry)
+//        }
+//
+//        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
+//
+//        let pieChartData = PieChartData(dataSet: pieChartDataSet)
+//        pieChartData.setDrawValues(false)
+//        self.itemsView.data = pieChartData
+//
+//        var colors: [UIColor] = []
+//
+//        for i in 0..<dataPoints.count {
+//            let red = Double(arc4random_uniform(256))
+//            let green = Double(arc4random_uniform(256))
+//            let blue = Double(arc4random_uniform(256))
+//
+//            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+//            colors.append(color)
+//        }
+//        pieChartDataSet.colors = colors
+//    }
+}
+
+extension ChartSpinnerViewController: ChartSpinnerPresenterView {
     func setChart(dataPoints: [NSManagedObject]) {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
@@ -180,4 +197,22 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         }
         pieChartDataSet.colors = colors
     }
+    
+    func spinAction() {
+        itemsView.highlightValue(x: -1, y: -1, dataSetIndex: 0)
+        aRandomInt = generateRandomNumber(min:0, max: self.items.count)
+        
+        self.itemsView.spin(duration: 3, fromAngle: 0, toAngle: 1080)
+        
+        let myString = "spinning..."
+        let myAttribute = [ NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 15)!]
+        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
+        
+        itemsView.centerAttributedText = myAttrString
+        
+        if isTimerRunning == false {
+            runTimer()
+        }
+    }
+    
 }

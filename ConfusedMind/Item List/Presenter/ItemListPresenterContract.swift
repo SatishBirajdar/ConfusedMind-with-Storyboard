@@ -9,7 +9,9 @@
 import Foundation
 
 protocol ItemListPresenterView{
-    func displayItems(items: [Item])
+    func loadOptionList(options: [Item])
+    func addNewOption()
+    func deleteOption(index: Int)
 }
 
 protocol ItemListPresenter {

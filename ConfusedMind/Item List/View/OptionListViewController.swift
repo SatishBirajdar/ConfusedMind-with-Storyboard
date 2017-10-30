@@ -70,7 +70,7 @@ class OptionListViewController: UITableViewController, UITextFieldDelegate {
             appDelegate.persistentContainer.viewContext
 
         let entity =
-            NSEntityDescription.entity(forEntityName: "Item",
+            NSEntityDescription.entity(forEntityName: "Option",
                                        in: managedContext)!
 
         let option = NSManagedObject(entity: entity,
@@ -92,7 +92,7 @@ class OptionListViewController: UITableViewController, UITextFieldDelegate {
 }
 
 extension OptionListViewController: OptionListPresenterView {
-    func loadOptionList(options: [Item]) {
+    func loadOptionList(options: [Option]) {
         self.options = options
     }
     

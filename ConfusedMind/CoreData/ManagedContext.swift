@@ -36,7 +36,7 @@ class ManagedContext {
         setManagedContext()
         
         let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Item")
+            NSFetchRequest<NSManagedObject>(entityName: "Option")
         
         //3
         do {
@@ -84,12 +84,12 @@ class ManagedContext {
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
-        let itemToDelete = options[index]
+        let optionToDelete = options[index]
         
         
 //        let itemToDelete = items[indexPath.row]
 //        items.remove(at: indexPath.row)
-        managedContext.delete(itemToDelete)
+        managedContext.delete(optionToDelete)
         do {
             try managedContext.save()
 //            tableView.deleteRows(at: [indexPath], with: .left)
@@ -156,12 +156,12 @@ class ManagedContext {
             appDelegate.persistentContainer.viewContext
         
         let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Item")
+            NSFetchRequest<NSManagedObject>(entityName: "Option")
         
         do {
-            let items = try managedContext.fetch(fetchRequest)
-            let item = items[index]
-            item.setValue(optionName, forKey: "name")
+            let options = try managedContext.fetch(fetchRequest)
+            let option = options[index]
+            option.setValue(optionName, forKey: "name")
             
             //save the context
             do {

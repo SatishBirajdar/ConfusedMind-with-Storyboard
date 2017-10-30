@@ -10,7 +10,7 @@ import Foundation
 
 class OptionListPresenterImpl: OptionListPresenter {
     
-    let options: [Item] = []
+    let options: [Option] = []
     var optionPresenterView: OptionListPresenterView!
     init() {
         

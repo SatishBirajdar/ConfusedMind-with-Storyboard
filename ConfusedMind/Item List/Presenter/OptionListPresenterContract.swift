@@ -9,7 +9,7 @@
 import Foundation
 
 protocol OptionListPresenterView{
-    func loadOptionList(options: [Item])
+    func loadOptionList(options: [Option])
     func addNewOption()
     func deleteOption(index: Int)
 }

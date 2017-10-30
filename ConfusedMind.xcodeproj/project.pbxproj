@@ -15,15 +15,13 @@
 		E308CB8E1F9696C70041378B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E308CB8C1F9696C70041378B /* LaunchScreen.storyboard */; };
 		E308CB991F9696C70041378B /* ConfusedMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CB981F9696C70041378B /* ConfusedMindTests.swift */; };
 		E308CBA41F9696C70041378B /* ConfusedMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBA31F9696C70041378B /* ConfusedMindUITests.swift */; };
-		E308CBBB1F9697CE0041378B /* ItemPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB11F9697CD0041378B /* ItemPresenterImpl.swift */; };
+		E308CBBB1F9697CE0041378B /* OptionListPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB11F9697CD0041378B /* OptionListPresenterImpl.swift */; };
 		E308CBBC1F9697CE0041378B /* ChartSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB21F9697CD0041378B /* ChartSpinnerViewController.swift */; };
-		E308CBBD1F9697CE0041378B /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB31F9697CD0041378B /* ItemService.swift */; };
-		E308CBBE1F9697CE0041378B /* AddListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB41F9697CD0041378B /* AddListItemViewController.swift */; };
-		E308CBBF1F9697CE0041378B /* AddListItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB51F9697CD0041378B /* AddListItemPresenter.swift */; };
+		E308CBBD1F9697CE0041378B /* OptionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB31F9697CD0041378B /* OptionListService.swift */; };
 		E308CBC01F9697CE0041378B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB61F9697CD0041378B /* ColorPalette.swift */; };
-		E308CBC21F9697CE0041378B /* ItemListPresenterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB81F9697CD0041378B /* ItemListPresenterContract.swift */; };
+		E308CBC21F9697CE0041378B /* OptionListPresenterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB81F9697CD0041378B /* OptionListPresenterContract.swift */; };
 		E308CBC31F9697CE0041378B /* CardViewDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB91F9697CD0041378B /* CardViewDesignable.swift */; };
-		E308CBC41F9697CE0041378B /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBBA1F9697CD0041378B /* ItemListViewController.swift */; };
+		E308CBC41F9697CE0041378B /* OptionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBBA1F9697CD0041378B /* OptionListViewController.swift */; };
 		E30946D01F9859E200B80395 /* ManagedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30946CF1F9859E100B80395 /* ManagedContext.swift */; };
 		E35094DD1F969DF2001CFF5C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; };
 		E35094DE1F969DF2001CFF5C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -78,15 +76,13 @@
 		E308CB9F1F9696C70041378B /* ConfusedMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfusedMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E308CBA31F9696C70041378B /* ConfusedMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfusedMindUITests.swift; sourceTree = "<group>"; };
 		E308CBA51F9696C70041378B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E308CBB11F9697CD0041378B /* ItemPresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPresenterImpl.swift; sourceTree = "<group>"; };
+		E308CBB11F9697CD0041378B /* OptionListPresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionListPresenterImpl.swift; sourceTree = "<group>"; };
 		E308CBB21F9697CD0041378B /* ChartSpinnerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSpinnerViewController.swift; sourceTree = "<group>"; };
-		E308CBB31F9697CD0041378B /* ItemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
-		E308CBB41F9697CD0041378B /* AddListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListItemViewController.swift; sourceTree = "<group>"; };
-		E308CBB51F9697CD0041378B /* AddListItemPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListItemPresenter.swift; sourceTree = "<group>"; };
+		E308CBB31F9697CD0041378B /* OptionListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionListService.swift; sourceTree = "<group>"; };
 		E308CBB61F9697CD0041378B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
-		E308CBB81F9697CD0041378B /* ItemListPresenterContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListPresenterContract.swift; sourceTree = "<group>"; };
+		E308CBB81F9697CD0041378B /* OptionListPresenterContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionListPresenterContract.swift; sourceTree = "<group>"; };
 		E308CBB91F9697CD0041378B /* CardViewDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewDesignable.swift; sourceTree = "<group>"; };
-		E308CBBA1F9697CD0041378B /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		E308CBBA1F9697CD0041378B /* OptionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionListViewController.swift; sourceTree = "<group>"; };
 		E30946CF1F9859E100B80395 /* ManagedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContext.swift; sourceTree = "<group>"; };
 		E35094DC1F969DF2001CFF5C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = ../Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
@@ -156,7 +152,6 @@
 			children = (
 				E35094E11F969E80001CFF5C /* Chart Spinner */,
 				E35094E21F969E91001CFF5C /* Item List */,
-				E35094E31F969EB4001CFF5C /* Add List Item */,
 				E30946D11F9859EE00B80395 /* CoreData */,
 				E35094DF1F969E5D001CFF5C /* Utils */,
 				E35094E01F969E68001CFF5C /* Storyboad */,
@@ -240,19 +235,10 @@
 			path = "Item List";
 			sourceTree = "<group>";
 		};
-		E35094E31F969EB4001CFF5C /* Add List Item */ = {
-			isa = PBXGroup;
-			children = (
-				E3B4F3951F96C138001BC7B9 /* Presenter */,
-				E3B4F3961F96C142001BC7B9 /* View */,
-			);
-			path = "Add List Item";
-			sourceTree = "<group>";
-		};
 		E3B4F3921F96C109001BC7B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E308CBB31F9697CD0041378B /* ItemService.swift */,
+				E308CBB31F9697CD0041378B /* OptionListService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,7 +246,7 @@
 		E3B4F3931F96C121001BC7B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E308CBBA1F9697CD0041378B /* ItemListViewController.swift */,
+				E308CBBA1F9697CD0041378B /* OptionListViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,26 +254,10 @@
 		E3B4F3941F96C12B001BC7B9 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				E308CBB81F9697CD0041378B /* ItemListPresenterContract.swift */,
-				E308CBB11F9697CD0041378B /* ItemPresenterImpl.swift */,
+				E308CBB81F9697CD0041378B /* OptionListPresenterContract.swift */,
+				E308CBB11F9697CD0041378B /* OptionListPresenterImpl.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		E3B4F3951F96C138001BC7B9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				E308CBB51F9697CD0041378B /* AddListItemPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		E3B4F3961F96C142001BC7B9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E308CBB41F9697CD0041378B /* AddListItemViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E3F6C6171FA7D2BB00665465 /* Presenter */ = {
@@ -477,19 +447,17 @@
 			files = (
 				E3B4F3981F96CF50001BC7B9 /* UIImage+extensions.swift in Sources */,
 				E308CB891F9696C70041378B /* ConfusedMind.xcdatamodeld in Sources */,
-				E308CBC21F9697CE0041378B /* ItemListPresenterContract.swift in Sources */,
+				E308CBC21F9697CE0041378B /* OptionListPresenterContract.swift in Sources */,
 				E308CBC31F9697CE0041378B /* CardViewDesignable.swift in Sources */,
-				E308CBBF1F9697CE0041378B /* AddListItemPresenter.swift in Sources */,
-				E308CBC41F9697CE0041378B /* ItemListViewController.swift in Sources */,
+				E308CBC41F9697CE0041378B /* OptionListViewController.swift in Sources */,
 				E308CB811F9696C70041378B /* AppDelegate.swift in Sources */,
 				E308CBC01F9697CE0041378B /* ColorPalette.swift in Sources */,
-				E308CBBB1F9697CE0041378B /* ItemPresenterImpl.swift in Sources */,
+				E308CBBB1F9697CE0041378B /* OptionListPresenterImpl.swift in Sources */,
 				E3F6C6141FA7D28500665465 /* ChartSpinnerPresenterImpl.swift in Sources */,
-				E308CBBE1F9697CE0041378B /* AddListItemViewController.swift in Sources */,
 				E30946D01F9859E200B80395 /* ManagedContext.swift in Sources */,
 				E308CBBC1F9697CE0041378B /* ChartSpinnerViewController.swift in Sources */,
 				E3F6C6161FA7D2A500665465 /* ChartSpinnerPresenterContract.swift in Sources */,
-				E308CBBD1F9697CE0041378B /* ItemService.swift in Sources */,
+				E308CBBD1F9697CE0041378B /* OptionListService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

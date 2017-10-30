@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class ItemListViewController: UITableViewController, UITextFieldDelegate {
-    var items : [NSManagedObject] = []
-    var presenter: ItemListPresenter = ItemListPresenterImpl()
+class OptionListViewController: UITableViewController, UITextFieldDelegate {
+    var options : [NSManagedObject] = []
+    var presenter: OptionListPresenter = OptionListPresenterImpl()
     var managedContext = ManagedContext()
     
     var alertText: UITextField!
@@ -19,7 +19,6 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         
         if #available(iOS 11.0, *) {
 //            self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.automatic
@@ -38,7 +37,7 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        items = managedContext.fetchItems()
+        options = managedContext.fetchOptions()
     }
     
     @IBAction func editList(_ sender: UIBarButtonItem) {
@@ -74,12 +73,10 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
             NSEntityDescription.entity(forEntityName: "Item",
                                        in: managedContext)!
 
-        let item = NSManagedObject(entity: entity,
+        let option = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
 
-
-
-        item.setValue(name, forKeyPath: "name")
+        option.setValue(name, forKeyPath: "name")
 
 //        var item: NSManagedObject
 //
@@ -87,16 +84,16 @@ class ItemListViewController: UITableViewController, UITextFieldDelegate {
         
         do {
             try managedContext.save()
-            items.append(item)
+            options.append(option)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
 }
 
-extension ItemListViewController: ItemListPresenterView {
+extension OptionListViewController: OptionListPresenterView {
     func loadOptionList(options: [Item]) {
-        self.items = options
+        self.options = options
     }
     
     func addNewOption() {
@@ -131,25 +128,24 @@ extension ItemListViewController: ItemListPresenterView {
     }
     
     func deleteOption(index: Int) {
-        //        items.remove(at: index)
         managedContext.deleteOptionFromManagedContext(index: index)
     }
     
 }
 
-extension ItemListViewController {
+extension OptionListViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = self.items[indexPath.row]
+        let option = self.options[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableCell
-        cell.itemName.text = item.value(forKeyPath: "name") as? String
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OptionTableCell
+        cell.itemName.text = option.value(forKeyPath: "name") as? String
         cell.row = indexPath.row
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.items.count)
+        return (self.options.count)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -159,14 +155,14 @@ extension ItemListViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            items.remove(at: indexPath.row)
+            options.remove(at: indexPath.row)
             managedContext.deleteOptionFromManagedContext(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
          }
     }
 }
 
-extension ItemListViewController {
+extension OptionListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         tableView.deselectRow(at: indexPath, animated: false)
@@ -174,7 +170,7 @@ extension ItemListViewController {
     }
 }
 
-class ItemTableCell: UITableViewCell, UITextViewDelegate {
+class OptionTableCell: UITableViewCell, UITextViewDelegate {
     var row: Int = 0
     @IBOutlet weak var itemName: UITextField!
     var managedContext = ManagedContext()

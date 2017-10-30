@@ -55,7 +55,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         itemsView.noDataText = "No data"
-        items = managedContext.fetchItems()
+        items = managedContext.fetchOptions()
         
         guard items.count != 0 else {
             emptyChartView.isHidden = false

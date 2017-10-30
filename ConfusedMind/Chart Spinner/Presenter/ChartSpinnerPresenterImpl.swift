@@ -9,13 +9,6 @@
 import Foundation
 
 class ChartSpinnerPresenterImpl: ChartSpinnerPresenter {
-    
-
-    
-    
     func attachView(view: ChartSpinnerPresenterView) {
-        
     }
-    
-    
 }

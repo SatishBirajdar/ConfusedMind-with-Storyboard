@@ -18,7 +18,7 @@ class ManagedContext {
 //    return
 //    }
 //
-   var items : [NSManagedObject] = []
+   var options : [NSManagedObject] = []
     
     var managedContext: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     
@@ -31,7 +31,7 @@ class ManagedContext {
 
     }
     
-    func fetchItems() -> [NSManagedObject] {
+    func fetchOptions() -> [NSManagedObject] {
         
         setManagedContext()
         
@@ -40,11 +40,11 @@ class ManagedContext {
         
         //3
         do {
-            self.items = try self.managedContext.fetch(fetchRequest)
+            self.options = try self.managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        return self.items
+        return self.options
     }
     
 //    func save(name: String) {
@@ -84,7 +84,7 @@ class ManagedContext {
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
-        let itemToDelete = items[index]
+        let itemToDelete = options[index]
         
         
 //        let itemToDelete = items[indexPath.row]

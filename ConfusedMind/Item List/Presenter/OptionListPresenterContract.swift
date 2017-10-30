@@ -1,5 +1,5 @@
 //
-//  ItemPresenterContract.swift
+//  OptionPresenterContract.swift
 //  ConfusedMind
 //
 //  Created by Satish Birajdar on 2017-09-25.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol ItemListPresenterView{
+protocol OptionListPresenterView{
     func loadOptionList(options: [Item])
     func addNewOption()
     func deleteOption(index: Int)
 }
 
-protocol ItemListPresenter {
-    func attachView(view: ItemListPresenterView)
+protocol OptionListPresenter {
+    func attachView(view: OptionListPresenterView)
 }

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConfusedMind/Chart Spinner/View/ChartSpinnerViewController.swift"
-            timestampString = "531101665.533484"
+            timestampString = "531101730.156864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "spinAction()"
             landmarkType = "7">
          </BreakpointContent>

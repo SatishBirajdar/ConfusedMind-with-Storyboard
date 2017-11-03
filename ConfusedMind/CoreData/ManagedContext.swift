@@ -47,8 +47,8 @@ class ManagedContext {
         return self.options
     }
     
-///    func save(name: String) {
-//        guard let appDelegate =
+//    func save(name: String) {
+///        guard let appDelegate =
 //            UIApplication.shared.delegate as? AppDelegate else {
 //                return
 //        }

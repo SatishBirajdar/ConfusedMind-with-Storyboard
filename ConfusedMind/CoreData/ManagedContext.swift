@@ -47,12 +47,12 @@ class ManagedContext {
         return self.options
     }
     
-///    func save(name: String) {
-//        guard let appDelegate =
+//    func save(name: String) {
+///        guard let appDelegate =
 //            UIApplication.shared.delegate as? AppDelegate else {
 //                return
 //        }
-//        
+//after revert
 //        let managedContext =
 //            appDelegate.persistentContainer.viewContext
 //        

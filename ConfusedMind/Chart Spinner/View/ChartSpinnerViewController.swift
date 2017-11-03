@@ -41,23 +41,26 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             // Fallback on earlier versions
         }
         
-        
+        initialScreenSetup()
+    }
+    
+    func initialScreenSetup() {
+        navigationController?.navigationBar.tintColor = UIColor.white
         emptyChartView.isHidden = true
-        
-        itemsView.noDataText = "No data"
         itemsView.chartDescription?.text = ""
         itemsView.highlightPerTapEnabled = false
-        itemsView.noDataTextColor = ColorPalette.darkRed
-        
         spinButton.layer.cornerRadius = 12
-        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        itemsView.noDataText = "No data"
+//        itemsView.noDataText = "No data"
         items = managedContext.fetchOptions()
         
-        guard items.count != 0 else {
+        showChartViewWithOptions(optionsCount: items.count)
+    }
+    
+    func showChartViewWithOptions(optionsCount: Int){
+        guard optionsCount != 0 else {
             emptyChartView.isHidden = false
             itemsView.isHidden = true
             spinButton.isHidden = true
@@ -90,18 +93,8 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         
         if self.seconds < 0 {
             timer.invalidate()
-            //Send alert to indicate time's up.
-            
             itemsView.centerText = ""
             itemsView.highlightValue(x: aRandomInt, y: 0.0, dataSetIndex: 0)
-            
-            
-//            let layer : CALayer = CALayer()
-//            layer.backgroundColor = UIColor.red as? CGColor
-//            itemsView.draw(layer, in: CGPoint(x: aRandomInt, y: 0.0) as! CGContext)
-//
-//            itemsView.hi
-            
             
             self.seconds = 1
             isTimerRunning = false
@@ -137,35 +130,6 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
         sender.setImage(mute, for: UIControlState.normal)
         isSpeakerEnabled = false
     }
-    
-//    func setChart(dataPoints: [NSManagedObject]) {
-//        var dataEntries: [ChartDataEntry] = []
-//        for i in 0..<dataPoints.count {
-//            let item = self.items[i]
-//            let itemName = item.value(forKeyPath: "name") as? String
-//
-//            let dataEntry = PieChartDataEntry(value: 1.0, label: itemName, data:  dataPoints[i] as AnyObject)
-//            dataEntries.append(dataEntry)
-//        }
-//
-//        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
-//
-//        let pieChartData = PieChartData(dataSet: pieChartDataSet)
-//        pieChartData.setDrawValues(false)
-//        self.itemsView.data = pieChartData
-//
-//        var colors: [UIColor] = []
-//
-//        for i in 0..<dataPoints.count {
-//            let red = Double(arc4random_uniform(256))
-//            let green = Double(arc4random_uniform(256))
-//            let blue = Double(arc4random_uniform(256))
-//
-//            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-//            colors.append(color)
-//        }
-//        pieChartDataSet.colors = colors
-//    }
 }
 
 extension ChartSpinnerViewController: ChartSpinnerPresenterView {

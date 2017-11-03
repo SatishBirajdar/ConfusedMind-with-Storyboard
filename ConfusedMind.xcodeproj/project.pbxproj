@@ -13,7 +13,6 @@
 		E308CB891F9696C70041378B /* ConfusedMind.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E308CB871F9696C70041378B /* ConfusedMind.xcdatamodeld */; };
 		E308CB8B1F9696C70041378B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E308CB8A1F9696C70041378B /* Assets.xcassets */; };
 		E308CB8E1F9696C70041378B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E308CB8C1F9696C70041378B /* LaunchScreen.storyboard */; };
-		E308CB991F9696C70041378B /* ConfusedMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CB981F9696C70041378B /* ConfusedMindTests.swift */; };
 		E308CBA41F9696C70041378B /* ConfusedMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBA31F9696C70041378B /* ConfusedMindUITests.swift */; };
 		E308CBBB1F9697CE0041378B /* OptionListPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB11F9697CD0041378B /* OptionListPresenterImpl.swift */; };
 		E308CBBC1F9697CE0041378B /* ChartSpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E308CBB21F9697CD0041378B /* ChartSpinnerViewController.swift */; };
@@ -25,6 +24,7 @@
 		E30946D01F9859E200B80395 /* ManagedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30946CF1F9859E100B80395 /* ManagedContext.swift */; };
 		E35094DD1F969DF2001CFF5C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; };
 		E35094DE1F969DF2001CFF5C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E39093441FA8096200963BEE /* OptionListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39093431FA8096200963BEE /* OptionListPresenterTest.swift */; };
 		E3B4F3981F96CF50001BC7B9 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */; };
 		E3F6C6141FA7D28500665465 /* ChartSpinnerPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6131FA7D28500665465 /* ChartSpinnerPresenterImpl.swift */; };
 		E3F6C6161FA7D2A500665465 /* ChartSpinnerPresenterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6151FA7D2A500665465 /* ChartSpinnerPresenterContract.swift */; };
@@ -71,7 +71,6 @@
 		E308CB8D1F9696C70041378B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E308CB8F1F9696C70041378B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E308CB941F9696C70041378B /* ConfusedMindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfusedMindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E308CB981F9696C70041378B /* ConfusedMindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfusedMindTests.swift; sourceTree = "<group>"; };
 		E308CB9A1F9696C70041378B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E308CB9F1F9696C70041378B /* ConfusedMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfusedMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E308CBA31F9696C70041378B /* ConfusedMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfusedMindUITests.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		E308CBBA1F9697CD0041378B /* OptionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionListViewController.swift; sourceTree = "<group>"; };
 		E30946CF1F9859E100B80395 /* ManagedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContext.swift; sourceTree = "<group>"; };
 		E35094DC1F969DF2001CFF5C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = ../Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
+		E39093431FA8096200963BEE /* OptionListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListPresenterTest.swift; sourceTree = "<group>"; };
 		E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		E3F6C6131FA7D28500665465 /* ChartSpinnerPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSpinnerPresenterImpl.swift; sourceTree = "<group>"; };
 		E3F6C6151FA7D2A500665465 /* ChartSpinnerPresenterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSpinnerPresenterContract.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 		E308CB971F9696C70041378B /* ConfusedMindTests */ = {
 			isa = PBXGroup;
 			children = (
-				E308CB981F9696C70041378B /* ConfusedMindTests.swift */,
+				E39093431FA8096200963BEE /* OptionListPresenterTest.swift */,
 				E308CB9A1F9696C70041378B /* Info.plist */,
 			);
 			path = ConfusedMindTests;
@@ -465,7 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E308CB991F9696C70041378B /* ConfusedMindTests.swift in Sources */,
+				E39093441FA8096200963BEE /* OptionListPresenterTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

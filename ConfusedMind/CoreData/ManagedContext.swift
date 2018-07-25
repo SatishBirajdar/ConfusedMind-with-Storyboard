@@ -52,7 +52,7 @@ class ManagedContext {
 //            UIApplication.shared.delegate as? AppDelegate else {
 //                return
 //        }
-//after revert
+//
 //        let managedContext =
 //            appDelegate.persistentContainer.viewContext
 //        
@@ -160,8 +160,8 @@ class ManagedContext {
         
         do {
             let options = try managedContext.fetch(fetchRequest)
-            let option = options[index]
-            option.setValue(optionName, forKey: "name")
+            let optionItem = options[index]
+            optionItem.setValue(optionName, forKey: "name")
             
             //save the context
             do {

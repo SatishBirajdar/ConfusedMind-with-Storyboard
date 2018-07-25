@@ -73,10 +73,10 @@ class OptionListViewController: UITableViewController, UITextFieldDelegate {
             NSEntityDescription.entity(forEntityName: "Option",
                                        in: managedContext)!
 
-        let option = NSManagedObject(entity: entity,
+        let optionItem = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
 
-        option.setValue(name, forKeyPath: "name")
+        optionItem.setValue(name, forKeyPath: "name")
 
 //        var item: NSManagedObject
 //
@@ -84,7 +84,7 @@ class OptionListViewController: UITableViewController, UITextFieldDelegate {
         
         do {
             try managedContext.save()
-            options.append(option)
+            options.append(optionItem)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -136,10 +136,10 @@ extension OptionListViewController: OptionListPresenterView {
 extension OptionListViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let option = self.options[indexPath.row]
+        let optionItem = self.options[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OptionTableCell
-        cell.optionName.text = option.value(forKeyPath: "name") as? String
+        cell.optionName.text = optionItem.value(forKeyPath: "name") as? String
         cell.row = indexPath.row
         return cell
     }

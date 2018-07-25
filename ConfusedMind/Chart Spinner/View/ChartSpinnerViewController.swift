@@ -22,6 +22,8 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     
     var managedContext = ManagedContext()
     var items : [NSManagedObject] = []
+    var chartItems: [ChartItem] = []
+    var nonVisitedChartItems: [ChartItem] = []
     
     var seconds = 1
     var timer = Timer()
@@ -55,8 +57,16 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
 //        itemsView.noDataText = "No data"
         items = managedContext.fetchOptions()
-        
+        contextToObject(items)
         showChartViewWithOptions(optionsCount: items.count)
+    }
+    
+    func contextToObject(_ items: [NSManagedObject]){
+        var chartItem : ChartItem
+        for i in 0 ... (items.count-1) {
+            chartItem = ChartItem(id: i, visited: false, data: (items[Int(i)].value(forKeyPath: "name") as? String)!)
+            chartItems.append(chartItem)
+        }
     }
     
     func showChartViewWithOptions(optionsCount: Int){
@@ -84,6 +94,7 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
     @IBAction func spinButtonAction(_ sender: Any) {
         spinAction()
     }
+    
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ChartSpinnerViewController.updateTimer)), userInfo: nil, repeats: true)
         isTimerRunning = true
@@ -103,6 +114,17 @@ class ChartSpinnerViewController: UIViewController, ChartViewDelegate {
             let synth = AVSpeechSynthesizer()
             let myUtterance = AVSpeechUtterance(string: itemName!)
             myUtterance.rate = 0.5
+            
+            
+            chartItems = chartItems.map{
+                var chartItem = $0
+                if $0.id == Int(aRandomInt) {
+                    chartItem.visited = true
+                }
+                return chartItem
+            }
+            
+            nonVisitedChartItems = chartItems.filter { !$0.visited }
 
             if isSpeakerEnabled {
                 synth.speak(myUtterance)

@@ -25,6 +25,7 @@
 		E35094DD1F969DF2001CFF5C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; };
 		E35094DE1F969DF2001CFF5C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E35094DC1F969DF2001CFF5C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E39093441FA8096200963BEE /* OptionListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39093431FA8096200963BEE /* OptionListPresenterTest.swift */; };
+		E3B4540F209F825600889547 /* ChartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4540E209F825600889547 /* ChartItem.swift */; };
 		E3B4F3981F96CF50001BC7B9 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */; };
 		E3F6C6141FA7D28500665465 /* ChartSpinnerPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6131FA7D28500665465 /* ChartSpinnerPresenterImpl.swift */; };
 		E3F6C6161FA7D2A500665465 /* ChartSpinnerPresenterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6151FA7D2A500665465 /* ChartSpinnerPresenterContract.swift */; };
@@ -85,6 +86,7 @@
 		E30946CF1F9859E100B80395 /* ManagedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContext.swift; sourceTree = "<group>"; };
 		E35094DC1F969DF2001CFF5C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = ../Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		E39093431FA8096200963BEE /* OptionListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListPresenterTest.swift; sourceTree = "<group>"; };
+		E3B4540E209F825600889547 /* ChartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartItem.swift; sourceTree = "<group>"; };
 		E3B4F3971F96CF50001BC7B9 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		E3F6C6131FA7D28500665465 /* ChartSpinnerPresenterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSpinnerPresenterImpl.swift; sourceTree = "<group>"; };
 		E3F6C6151FA7D2A500665465 /* ChartSpinnerPresenterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSpinnerPresenterContract.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		E35094E11F969E80001CFF5C /* Chart Spinner */ = {
 			isa = PBXGroup;
 			children = (
+				E3B45410209F826000889547 /* Model */,
 				E3F6C6181FA7D2D200665465 /* View */,
 				E3F6C6171FA7D2BB00665465 /* Presenter */,
 			);
@@ -233,6 +236,14 @@
 				E3B4F3941F96C12B001BC7B9 /* Presenter */,
 			);
 			path = "Item List";
+			sourceTree = "<group>";
+		};
+		E3B45410209F826000889547 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3B4540E209F825600889547 /* ChartItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E3B4F3921F96C109001BC7B9 /* Model */ = {
@@ -446,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3B4F3981F96CF50001BC7B9 /* UIImage+extensions.swift in Sources */,
+				E3B4540F209F825600889547 /* ChartItem.swift in Sources */,
 				E308CB891F9696C70041378B /* ConfusedMind.xcdatamodeld in Sources */,
 				E308CBC21F9697CE0041378B /* OptionListPresenterContract.swift in Sources */,
 				E308CBC31F9697CE0041378B /* CardViewDesignable.swift in Sources */,
